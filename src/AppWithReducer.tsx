@@ -23,23 +23,8 @@ import {
 } from "./model/todolists-reducer";
 import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC, tasksReducer} from "./model/tasks-reducer";
 
-export type TaskType = {
-	id: string
-	title: string
-	isDone: boolean
-}
 
 export type FilterValuesType = 'all' | 'active' | 'completed'
-
-export type TodolistType = {
-	id: string
-	title: string
-	filter: FilterValuesType
-}
-
-export type TasksStateType = {
-	[key: string]: TaskType[]
-}
 
 type ThemeMode = 'dark' | 'light'
 
