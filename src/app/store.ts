@@ -12,4 +12,5 @@ export const store = legacy_createStore(rootReducer)
 
 export type RootState = ReturnType<typeof store.getState>
 
+// @ts-ignore
 window.store = store
