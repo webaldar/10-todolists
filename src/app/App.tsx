@@ -22,6 +22,7 @@ import {
 import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC} from "../model/tasks-reducer";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "./store";
+import {v1} from "uuid";
 
 export type TaskType = {
 	id: string
@@ -63,8 +64,8 @@ function App() {
 
 	}
 
-	const changeFilter = (filter: FilterValuesType, todolistId: string) => {
-		dispatch(changeTodolistFilterAC(todolistId, filter))
+	const changeFilter = (filter: FilterValuesType, id: string) => {
+		dispatch(changeTodolistFilterAC({id, filter}))
 
 	}
 
@@ -85,8 +86,8 @@ function App() {
 
 	}
 
-	const updateTodolist = (todolistId: string, title: string) => {
-		dispatch(changeTodolistTitleAC(todolistId,title))
+	const updateTodolist = (id: string, title: string) => {
+		dispatch(changeTodolistTitleAC({id, title}))
 	}
 
 	const changeModeHandler = () => {
@@ -122,7 +123,7 @@ function App() {
 			</AppBar>
 			<Container fixed>
 				<Grid container sx={{mb: '30px'}}>
-					<AddItemForm addItem={addTodolist}/>
+					<AddItemForm key={v1()} addItem={addTodolist}/>
 				</Grid>
 
 				<Grid container spacing={4}>
