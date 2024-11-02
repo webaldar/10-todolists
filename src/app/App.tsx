@@ -1,8 +1,7 @@
 import './App.css';
-import {Todolist} from "./Todolist";
-import React, {useReducer, useState} from "react";
-import {v1} from "uuid";
-import {AddItemForm} from "./AddItemForm";
+import {Todolist} from "../Todolist";
+import React, {useState} from "react";
+import {AddItemForm} from "../AddItemForm";
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
@@ -10,7 +9,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Container from "@mui/material/Container";
 import Grid from '@mui/material/Unstable_Grid2';
 import Paper from '@mui/material/Paper';
-import {MenuButton} from "./MenuButton";
+import {MenuButton} from "../MenuButton";
 import {createTheme, ThemeProvider} from '@mui/material/styles';
 import Switch from '@mui/material/Switch';
 import CssBaseline from "@mui/material/CssBaseline";
@@ -19,19 +18,32 @@ import {
 	changeTodolistFilterAC,
 	changeTodolistTitleAC,
 	removeTodolistAC,
-	todolistsReducer
-} from "./model/todolists-reducer";
-import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC, tasksReducer} from "./model/tasks-reducer";
+} from "../model/todolists-reducer";
+import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC} from "../model/tasks-reducer";
 import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "./app/store";
-import {TasksStateType, TodolistType} from "./App";
+import {RootState} from "./store";
 
+export type TaskType = {
+	id: string
+	title: string
+	isDone: boolean
+}
+
+export type TasksStateType = {
+	[key: string]: TaskType[]
+}
 
 export type FilterValuesType = 'all' | 'active' | 'completed'
 
+export type TodolistType = {
+	id: string
+	title: string
+	filter: FilterValuesType
+}
+
 type ThemeMode = 'dark' | 'light'
 
-function AppWithRedux() {
+function App() {
 	const todolists = useSelector<RootState, TodolistType[]>(state => state.todolists)
 	const tasks = useSelector<RootState, TasksStateType>(state => state.tasks )
 
@@ -154,4 +166,4 @@ function AppWithRedux() {
 	);
 }
 
-export default AppWithRedux;
+export default App;
